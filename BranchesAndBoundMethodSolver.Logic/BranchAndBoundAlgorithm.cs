@@ -81,7 +81,7 @@
 
         private void BranchNode(Node node)
         {
-            for (var column = 0; column <= _matrix.Rows; column++)
+            for (var column = 0; column <= _matrix.Rows - 1; column++)
             {
                 if (_matrix[(int)node.Name, column] > 0)
                 {
@@ -91,7 +91,7 @@
                         Path = node.Path + (NodeName)column,
                         Name = (NodeName)column,
                         Cost = node.Cost + _matrix[(int)node.Name, column],
-                        Status = NodeStatus.Branched
+                        Status = NodeStatus.ReadyToBranch
                     });
                 }
             }
