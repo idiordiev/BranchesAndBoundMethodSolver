@@ -7,7 +7,7 @@
     
     public class Matrix : ICloneable
     {
-        private double[,] _array;
+        private int[,] _array;
         
         /// <summary>
         /// Number of rows.
@@ -28,7 +28,7 @@
         /// <summary>
         /// Gets an array of floating-point values that represents the elements of this Matrix.
         /// </summary>
-        public double[,] Array
+        public int[,] Array
         {
             get => _array;
         }
@@ -46,7 +46,7 @@
                 throw new ArgumentOutOfRangeException();
             }
             
-            _array = new double[rows, columns];
+            _array = new int[rows, columns];
 
             for (int i = 0; i < rows; i++)
             {
@@ -62,7 +62,7 @@
         /// </summary>
         /// <param name="array">An array of floating-point values that represents the elements of this Matrix.</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public Matrix(double[,] array)
+        public Matrix(int[,] array)
         {
             if (array == null)
             {
@@ -78,7 +78,7 @@
         /// <param name="row"></param>
         /// <param name="column"></param>
         /// <exception cref="ArgumentException"></exception>
-        public double this[int row, int column]
+        public int this[int row, int column]
         {
             get
             {

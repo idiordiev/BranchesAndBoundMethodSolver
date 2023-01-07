@@ -2,6 +2,6 @@
 {
     public interface IAlgorithm
     {
-        IEnumerable<Subset> Calculate(Matrix matrix);
+        IEnumerable<Node> Calculate(NodeName endNode);
     }
 }

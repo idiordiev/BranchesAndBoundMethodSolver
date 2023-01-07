@@ -1,9 +1,10 @@
 ﻿namespace BranchesAndBoundMethodSolver.Logic
 {
-    public class Subset
+    public class Node
     {
         public string Path { get; set; }
+        public NodeName Name { get; set; }
         public int Cost { get; set; }
-        public SubsetStatus Status { get; set; }
+        public NodeStatus Status { get; set; }
     }
 }
