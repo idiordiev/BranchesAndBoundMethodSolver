@@ -1,3 +1,5 @@
+using BranchesAndBoundMethodSolver.Logic;
+
 namespace BranchesAndBoundMethodSolver.WinForms
 {
     public partial class BranchesAndBoundMethodSolver : Form
@@ -25,7 +27,31 @@ namespace BranchesAndBoundMethodSolver.WinForms
             if (!string.IsNullOrEmpty(outputText))
                 Clipboard.SetText(outputText);
             else
-                MessageBox.Show("Вивід пустий!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Вивід пустий!", "Помилка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void ProceedButton_Click(object sender, EventArgs e)
+        {
+            string inputFilePath = PathString.Text;
+
+            if (!string.IsNullOrEmpty(inputFilePath))
+            {
+                Matrix inputMatrix = MatrixReader.ReadMatrix(inputFilePath);
+                IAlgorithm bnbAlgorithm = new BranchAndBoundAlgorithm(inputMatrix);
+
+                // Needs update~ Defining last element of sequence to put there \/
+                IEnumerable<Node> result = bnbAlgorithm.Calculate(NodeName.K);
+
+                string htmlOutput = HtmlWrapper.Wrapp(result);
+
+                HtmlOutput.Text = htmlOutput;
+            }
+            else
+            {
+                MessageBox.Show("Шлях не задано!", "Помилка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

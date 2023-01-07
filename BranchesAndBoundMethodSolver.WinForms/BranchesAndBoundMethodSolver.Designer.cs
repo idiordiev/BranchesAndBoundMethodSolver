@@ -90,6 +90,7 @@
             this.ProceedButton.TabIndex = 4;
             this.ProceedButton.Text = "Виконати";
             this.ProceedButton.UseVisualStyleBackColor = false;
+            this.ProceedButton.Click += new System.EventHandler(this.ProceedButton_Click);
             // 
             // HtmlOutputLabel
             // 
