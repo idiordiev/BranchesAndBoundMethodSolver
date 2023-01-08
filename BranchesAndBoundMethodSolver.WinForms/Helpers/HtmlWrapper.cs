@@ -28,19 +28,19 @@ namespace BranchesAndBoundMethodSolver.WinForms.Helpers
                 switch (node.Status)
                 {
                     case NodeStatus.Branched:
-                        stringBuilder.Append("         <td>{1:MC:=розгалужена~виключена&nbsp;за ВД~виключена&nbsp;за тестом~рекорд~-}</td>\n");
+                        stringBuilder.Append("         <td>{1:MC:=розгалужена~виключена&nbsp;за ВД~виключена&nbsp;за тестом~рекорд}</td>\n");
                         break;
 
                     case NodeStatus.ExcludedByVD:
-                        stringBuilder.Append("         <td>{1:MC:розгалужена~=виключена&nbsp;за ВД~виключена&nbsp;за тестом~рекорд~-}</td>\n");
+                        stringBuilder.Append("         <td>{1:MC:розгалужена~=виключена&nbsp;за ВД~виключена&nbsp;за тестом~рекорд}</td>\n");
                         break;
 
                     case NodeStatus.ExcludedByTest:
-                        stringBuilder.Append("         <td>{1:MC:розгалужена~виключена&nbsp;за ВД~=виключена&nbsp;за тестом~рекорд~-}</td>\n");
+                        stringBuilder.Append("         <td>{1:MC:розгалужена~виключена&nbsp;за ВД~=виключена&nbsp;за тестом~рекорд}</td>\n");
                         break;
 
                     case NodeStatus.Record:
-                        stringBuilder.Append("         <td>{1:MC:розгалужена~виключена&nbsp;за ВД~виключена&nbsp;за тестом~=рекорд~-}</td>\n");
+                        stringBuilder.Append("         <td>{1:MC:розгалужена~виключена&nbsp;за ВД~виключена&nbsp;за тестом~=рекорд}</td>\n");
                         break;
                 }
 
