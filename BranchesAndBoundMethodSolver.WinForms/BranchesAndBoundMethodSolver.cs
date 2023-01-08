@@ -1,4 +1,7 @@
 using BranchesAndBoundMethodSolver.Logic;
+using BranchesAndBoundMethodSolver.Logic.Interfaces;
+using BranchesAndBoundMethodSolver.Logic.Models;
+using BranchesAndBoundMethodSolver.WinForms.Helpers;
 
 namespace BranchesAndBoundMethodSolver.WinForms
 {

@@ -1,4 +1,4 @@
-﻿namespace BranchesAndBoundMethodSolver.Logic
+﻿namespace BranchesAndBoundMethodSolver.Logic.Enums
 {
     public enum NodeStatus
     {

@@ -1,8 +1,7 @@
-﻿using System.Globalization;
-using System.Text;
-using BranchesAndBoundMethodSolver.Logic;
+﻿using System.Text;
+using BranchesAndBoundMethodSolver.Logic.Models;
 
-namespace BranchesAndBoundMethodSolver.WinForms
+namespace BranchesAndBoundMethodSolver.WinForms.Helpers
 {
     public class HtmlWrapper
     {

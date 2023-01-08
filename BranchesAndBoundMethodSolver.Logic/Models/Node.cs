@@ -1,4 +1,6 @@
-﻿namespace BranchesAndBoundMethodSolver.Logic
+﻿using BranchesAndBoundMethodSolver.Logic.Enums;
+
+namespace BranchesAndBoundMethodSolver.Logic.Models
 {
     public class Node
     {

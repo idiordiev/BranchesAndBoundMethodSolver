@@ -1,4 +1,6 @@
-﻿namespace BranchesAndBoundMethodSolver.Logic
+﻿using BranchesAndBoundMethodSolver.Logic.Models;
+
+namespace BranchesAndBoundMethodSolver.WinForms.Helpers
 {
     public class MatrixReader
     {

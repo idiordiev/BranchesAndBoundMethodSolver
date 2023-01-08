@@ -1,4 +1,8 @@
-﻿namespace BranchesAndBoundMethodSolver.Logic
+﻿using BranchesAndBoundMethodSolver.Logic.Enums;
+using BranchesAndBoundMethodSolver.Logic.Interfaces;
+using BranchesAndBoundMethodSolver.Logic.Models;
+
+namespace BranchesAndBoundMethodSolver.Logic
 {
     public class BranchAndBoundAlgorithm : IAlgorithm
     {
