@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BranchesAndBoundMethodSolver));
             this.SelectFileButton = new System.Windows.Forms.Button();
             this.HtmlOutput = new System.Windows.Forms.RichTextBox();
-            this.File1Path = new System.Windows.Forms.Label();
+            this.FilePath = new System.Windows.Forms.Label();
             this.PathString = new System.Windows.Forms.TextBox();
             this.ProceedButton = new System.Windows.Forms.Button();
             this.HtmlOutputLabel = new System.Windows.Forms.Label();
@@ -61,15 +62,15 @@
             this.HtmlOutput.TabIndex = 1;
             this.HtmlOutput.Text = "";
             // 
-            // File1Path
+            // FilePath
             // 
-            this.File1Path.AutoSize = true;
-            this.File1Path.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.File1Path.Location = new System.Drawing.Point(11, 288);
-            this.File1Path.Name = "File1Path";
-            this.File1Path.Size = new System.Drawing.Size(81, 15);
-            this.File1Path.TabIndex = 2;
-            this.File1Path.Text = "Шлях файлу :";
+            this.FilePath.AutoSize = true;
+            this.FilePath.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.FilePath.Location = new System.Drawing.Point(11, 288);
+            this.FilePath.Name = "FilePath";
+            this.FilePath.Size = new System.Drawing.Size(81, 15);
+            this.FilePath.TabIndex = 2;
+            this.FilePath.Text = "Шлях файлу :";
             // 
             // PathString
             // 
@@ -90,7 +91,7 @@
             this.ProceedButton.TabIndex = 4;
             this.ProceedButton.Text = "Виконати";
             this.ProceedButton.UseVisualStyleBackColor = false;
-            this.ProceedButton.Click += new System.EventHandler(this.ProceedButton_Click);
+            this.ProceedButton.Click += new System.EventHandler(this.ProceedButton_ClickAsync);
             // 
             // HtmlOutputLabel
             // 
@@ -162,13 +163,13 @@
             this.Controls.Add(this.HtmlOutputLabel);
             this.Controls.Add(this.ProceedButton);
             this.Controls.Add(this.PathString);
-            this.Controls.Add(this.File1Path);
+            this.Controls.Add(this.FilePath);
             this.Controls.Add(this.HtmlOutput);
             this.Controls.Add(this.SelectFileButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "BranchesAndBoundMethodSolver";
-            this.ShowIcon = false;
             this.Text = "Метод меж та гілок";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -179,7 +180,7 @@
 
         private Button SelectFileButton;
         private RichTextBox HtmlOutput;
-        private Label File1Path;
+        private Label FilePath;
         private TextBox PathString;
         private Button ProceedButton;
         private Label HtmlOutputLabel;

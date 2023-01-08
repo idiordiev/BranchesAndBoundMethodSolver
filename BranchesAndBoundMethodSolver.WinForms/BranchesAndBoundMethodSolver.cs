@@ -31,27 +31,40 @@ namespace BranchesAndBoundMethodSolver.WinForms
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void ProceedButton_Click(object sender, EventArgs e)
+        private async void ProceedButton_ClickAsync(object sender, EventArgs e)
         {
             string inputFilePath = PathString.Text;
 
             if (!string.IsNullOrEmpty(inputFilePath))
             {
-                Matrix inputMatrix = MatrixReader.ReadMatrix(inputFilePath);
-                IAlgorithm bnbAlgorithm = new BranchAndBoundAlgorithm(inputMatrix);
+                Task<string> task = Task.Run(() => ProceedOperation(inputFilePath));
 
-                // Needs update~ Defining last element of sequence to put there \/
-                IEnumerable<Node> result = bnbAlgorithm.Calculate(NodeName.K);
+                if (!task.IsCompleted)
+                    HtmlOutput.Text = "Будь ласка зачекайте";
 
-                string htmlOutput = HtmlWrapper.Wrapp(result);
+                await task;
 
-                HtmlOutput.Text = htmlOutput;
+                HtmlOutput.Text = task.Result;
             }
             else
             {
                 MessageBox.Show("Шлях не задано!", "Помилка",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private string ProceedOperation(string inputFilePath)
+        {
+            Matrix inputMatrix = MatrixReader.ReadMatrix(inputFilePath);
+
+            IAlgorithm bnbAlgorithm = new BranchAndBoundAlgorithm(inputMatrix);
+            
+            // Needs update~ Defining last element of sequence to put there \/
+            IEnumerable<Node> result = bnbAlgorithm.Calculate(NodeName.K);
+
+            string htmlOutput = HtmlWrapper.Wrapp(result);
+
+            return htmlOutput;
         }
     }
 }
