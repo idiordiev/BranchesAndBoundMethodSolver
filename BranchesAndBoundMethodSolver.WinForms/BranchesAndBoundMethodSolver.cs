@@ -78,7 +78,7 @@ namespace BranchesAndBoundMethodSolver.WinForms
                 if (node.Status == NodeStatus.Record)
                 {
                     path += $"{node.Path} ";
-                    pathValue += $"{node.Cost} ";
+                    pathValue = $"{node.Cost} ";
                 }
             }
 

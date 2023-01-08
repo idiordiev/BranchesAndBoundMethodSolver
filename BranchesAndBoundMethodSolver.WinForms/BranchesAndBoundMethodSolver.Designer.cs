@@ -120,7 +120,7 @@
             // 
             this.resultLabel1.AutoSize = true;
             this.resultLabel1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.resultLabel1.Location = new System.Drawing.Point(12, 238);
+            this.resultLabel1.Location = new System.Drawing.Point(22, 238);
             this.resultLabel1.Name = "resultLabel1";
             this.resultLabel1.Size = new System.Drawing.Size(49, 19);
             this.resultLabel1.TabIndex = 7;
@@ -129,16 +129,17 @@
             // ResultPath
             // 
             this.ResultPath.AutoSize = true;
-            this.ResultPath.Location = new System.Drawing.Point(67, 242);
+            this.ResultPath.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ResultPath.Location = new System.Drawing.Point(67, 238);
             this.ResultPath.Name = "ResultPath";
-            this.ResultPath.Size = new System.Drawing.Size(0, 15);
+            this.ResultPath.Size = new System.Drawing.Size(0, 19);
             this.ResultPath.TabIndex = 8;
             // 
             // resultLabel2
             // 
             this.resultLabel2.AutoSize = true;
             this.resultLabel2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.resultLabel2.Location = new System.Drawing.Point(302, 236);
+            this.resultLabel2.Location = new System.Drawing.Point(284, 238);
             this.resultLabel2.Name = "resultLabel2";
             this.resultLabel2.Size = new System.Drawing.Size(109, 19);
             this.resultLabel2.TabIndex = 9;
@@ -147,9 +148,10 @@
             // ResultPathValue
             // 
             this.ResultPathValue.AutoSize = true;
-            this.ResultPathValue.Location = new System.Drawing.Point(417, 240);
+            this.ResultPathValue.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ResultPathValue.Location = new System.Drawing.Point(388, 238);
             this.ResultPathValue.Name = "ResultPathValue";
-            this.ResultPathValue.Size = new System.Drawing.Size(0, 15);
+            this.ResultPathValue.Size = new System.Drawing.Size(0, 19);
             this.ResultPathValue.TabIndex = 10;
             // 
             // CleanButton
