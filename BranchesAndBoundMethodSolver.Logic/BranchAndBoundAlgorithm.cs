@@ -36,36 +36,10 @@ namespace BranchesAndBoundMethodSolver.Logic
 
             while (_result.Any(n => n.Status == NodeStatus.ReadyToBranch))
             {
-                var currentRecordCandidates = _result.Where(n => n.Name == endNode).ToList();
+                var currentRecordCandidates = _result.Where(n => n.Name == endNode);
                 if (currentRecordCandidates.Any())
                 {
-                    while (true)
-                    {
-                        var currentRecord = currentRecordCandidates.OrderBy(r => r.Cost).First();
-
-                        var nodesReadyToTest = _result.Where(n => n.Status == NodeStatus.ReadyToBranch).ToList();
-
-                        if (nodesReadyToTest.Any())
-                        {
-                            foreach (var node in nodesReadyToTest)
-                            {
-                                if (node.Cost > currentRecord.Cost)
-                                {
-                                    node.Status = NodeStatus.ExcludedByTest;
-                                }
-                                else
-                                {
-                                    BranchNode(node);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            currentRecordCandidates.ForEach(r => r.Status = NodeStatus.Record);
-                            break;
-                        }
-                    }
-                    
+                    FindRecords(endNode);
                     break;
                 }
 
@@ -83,6 +57,43 @@ namespace BranchesAndBoundMethodSolver.Logic
             }
 
             return _result;
+        }
+
+        private void FindRecords(NodeName endNode)
+        {
+            while (true)
+            {
+                var currentRecordCandidates = _result.Where(n => n.Name == endNode && n.Status == NodeStatus.ReadyToBranch);
+                var currentRecord = currentRecordCandidates.OrderBy(r => r.Cost).First();
+
+                var nodesWithGreaterCost = _result.Where(n => n.Cost > currentRecord.Cost && n.Status == NodeStatus.ReadyToBranch);
+                foreach (var node in nodesWithGreaterCost)
+                {
+                    node.Status = NodeStatus.ExcludedByTest;
+                }
+
+                var nodesReadyToBranch = _result.Where(n => n.Status == NodeStatus.ReadyToBranch && n.Name != endNode)
+                    .OrderBy(n => n.Cost)
+                    .ThenByDescending(n => n.Path.Length)
+                    .ThenBy(n => n.Name);
+
+                if (nodesReadyToBranch.Any())
+                {
+                    foreach (var node in nodesReadyToBranch)
+                    {
+                        BranchNode(node);
+                        break;
+                    }
+                }
+                else
+                {
+                    foreach (var node in currentRecordCandidates)
+                    {
+                        node.Status = NodeStatus.Record;
+                    }
+                    break;
+                }
+            }
         }
 
         private void BranchNode(Node node)
