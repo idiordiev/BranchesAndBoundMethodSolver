@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using BranchesAndBoundMethodSolver.Logic.Enums;
 using BranchesAndBoundMethodSolver.Logic.Models;
 
 namespace BranchesAndBoundMethodSolver.WinForms.Helpers
@@ -22,9 +23,28 @@ namespace BranchesAndBoundMethodSolver.WinForms.Helpers
             {
                 stringBuilder.Append("     <tr>\r\n" +
                     "         <td>{1:SA:=" + $"{node.Path}" + "}</td>\n" +
-                    "         <td>{1:SA:=" + $"{node.Cost}" + "}</td>\n" +
-                    "         <td>{1:MC:=розгалужена~виключена&nbsp;за ВД~виключена&nbsp;за тестом~рекорд~-}</td>\n" +
-                    "     </tr>\n");
+                    "         <td>{1:SA:=" + $"{node.Cost}" + "}</td>\n");
+
+                switch (node.Status)
+                {
+                    case NodeStatus.Branched:
+                        stringBuilder.Append("         <td>{1:MC:=розгалужена~виключена&nbsp;за ВД~виключена&nbsp;за тестом~рекорд~-}</td>\n");
+                        break;
+
+                    case NodeStatus.ExcludedByVD:
+                        stringBuilder.Append("         <td>{1:MC:розгалужена~=виключена&nbsp;за ВД~виключена&nbsp;за тестом~рекорд~-}</td>\n");
+                        break;
+
+                    case NodeStatus.ExcludedByTest:
+                        stringBuilder.Append("         <td>{1:MC:розгалужена~виключена&nbsp;за ВД~=виключена&nbsp;за тестом~рекорд~-}</td>\n");
+                        break;
+
+                    case NodeStatus.Record:
+                        stringBuilder.Append("         <td>{1:MC:розгалужена~виключена&nbsp;за ВД~виключена&nbsp;за тестом~=рекорд~-}</td>\n");
+                        break;
+                }
+
+                stringBuilder.Append("     </tr>\n");
             }
 
             string endOfHtml = " </tbody>\n" +

@@ -37,9 +37,10 @@
             this.HtmlOutputLabel = new System.Windows.Forms.Label();
             this.CopyButton = new System.Windows.Forms.Button();
             this.resultLabel1 = new System.Windows.Forms.Label();
-            this.Path = new System.Windows.Forms.Label();
+            this.ResultPath = new System.Windows.Forms.Label();
             this.resultLabel2 = new System.Windows.Forms.Label();
-            this.PathValue = new System.Windows.Forms.Label();
+            this.ResultPathValue = new System.Windows.Forms.Label();
+            this.CleanButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // SelectFileButton
@@ -125,40 +126,51 @@
             this.resultLabel1.TabIndex = 7;
             this.resultLabel1.Text = "Шлях :";
             // 
-            // Path
+            // ResultPath
             // 
-            this.Path.AutoSize = true;
-            this.Path.Location = new System.Drawing.Point(67, 242);
-            this.Path.Name = "Path";
-            this.Path.Size = new System.Drawing.Size(0, 15);
-            this.Path.TabIndex = 8;
+            this.ResultPath.AutoSize = true;
+            this.ResultPath.Location = new System.Drawing.Point(67, 242);
+            this.ResultPath.Name = "ResultPath";
+            this.ResultPath.Size = new System.Drawing.Size(0, 15);
+            this.ResultPath.TabIndex = 8;
             // 
             // resultLabel2
             // 
             this.resultLabel2.AutoSize = true;
             this.resultLabel2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.resultLabel2.Location = new System.Drawing.Point(306, 238);
+            this.resultLabel2.Location = new System.Drawing.Point(302, 236);
             this.resultLabel2.Name = "resultLabel2";
             this.resultLabel2.Size = new System.Drawing.Size(109, 19);
             this.resultLabel2.TabIndex = 9;
             this.resultLabel2.Text = "Вартість шляху :";
             // 
-            // PathValue
+            // ResultPathValue
             // 
-            this.PathValue.AutoSize = true;
-            this.PathValue.Location = new System.Drawing.Point(417, 240);
-            this.PathValue.Name = "PathValue";
-            this.PathValue.Size = new System.Drawing.Size(0, 15);
-            this.PathValue.TabIndex = 10;
+            this.ResultPathValue.AutoSize = true;
+            this.ResultPathValue.Location = new System.Drawing.Point(417, 240);
+            this.ResultPathValue.Name = "ResultPathValue";
+            this.ResultPathValue.Size = new System.Drawing.Size(0, 15);
+            this.ResultPathValue.TabIndex = 10;
+            // 
+            // CleanButton
+            // 
+            this.CleanButton.Location = new System.Drawing.Point(458, 35);
+            this.CleanButton.Name = "CleanButton";
+            this.CleanButton.Size = new System.Drawing.Size(89, 31);
+            this.CleanButton.TabIndex = 11;
+            this.CleanButton.Text = "Очистити";
+            this.CleanButton.UseVisualStyleBackColor = true;
+            this.CleanButton.Click += new System.EventHandler(this.CleanButton_Click);
             // 
             // BranchesAndBoundMethodSolver
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(564, 327);
-            this.Controls.Add(this.PathValue);
+            this.Controls.Add(this.CleanButton);
+            this.Controls.Add(this.ResultPathValue);
             this.Controls.Add(this.resultLabel2);
-            this.Controls.Add(this.Path);
+            this.Controls.Add(this.ResultPath);
             this.Controls.Add(this.resultLabel1);
             this.Controls.Add(this.CopyButton);
             this.Controls.Add(this.HtmlOutputLabel);
@@ -171,6 +183,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "BranchesAndBoundMethodSolver";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Метод меж та гілок";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -187,8 +200,9 @@
         private Label HtmlOutputLabel;
         private Button CopyButton;
         private Label resultLabel1;
-        private Label Path;
+        private Label ResultPath;
         private Label resultLabel2;
-        private Label PathValue;
+        private Label ResultPathValue;
+        private Button CleanButton;
     }
 }

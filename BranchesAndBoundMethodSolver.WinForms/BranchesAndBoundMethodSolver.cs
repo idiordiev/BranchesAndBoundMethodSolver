@@ -1,4 +1,5 @@
 using BranchesAndBoundMethodSolver.Logic;
+using BranchesAndBoundMethodSolver.Logic.Enums;
 using BranchesAndBoundMethodSolver.Logic.Interfaces;
 using BranchesAndBoundMethodSolver.Logic.Models;
 using BranchesAndBoundMethodSolver.WinForms.Helpers;
@@ -65,12 +66,35 @@ namespace BranchesAndBoundMethodSolver.WinForms
 
             IAlgorithm bnbAlgorithm = new BranchAndBoundAlgorithm(inputMatrix);
             
-            // Needs update~ Defining last element of sequence to put there \/
             IEnumerable<Node> result = bnbAlgorithm.Calculate();
 
             string htmlOutput = HtmlWrapper.Wrapp(result);
 
+            string path = "";
+            string pathValue = "";
+            
+            foreach (var node in result)
+            {
+                if (node.Status == NodeStatus.Record)
+                {
+                    path += $"{node.Path} ";
+                    pathValue += $"{node.Cost} ";
+                }
+            }
+
+            ResultPath.Invoke((MethodInvoker)(() => ResultPath.Text = path));
+            ResultPathValue.Invoke((MethodInvoker)(() => ResultPathValue.Text = pathValue));
+
             return htmlOutput;
+        }
+
+        private void CleanButton_Click(object sender, EventArgs e)
+        {
+            ResultPath.Text = "";
+            ResultPathValue.Text = "";
+            HtmlOutput.Text = "";
+            PathString.Text = "";
+            CopyButton.Enabled = false;
         }
     }
 }

@@ -6,7 +6,12 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>calculating.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="calculating.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BranchesAndBoundMethodSolver.Logic\BranchesAndBoundMethodSolver.Logic.csproj" />
