@@ -6,16 +6,16 @@ namespace BranchesAndBoundMethodSolver.WinForms.Helpers
     {
         public static Matrix ReadMatrix(string fileName)
         {
-            var linesFromFile = File.ReadAllLines(fileName);
-            
+            string[] linesFromFile = File.ReadAllLines(fileName);
+
             int rows = linesFromFile.Length;
             int columns = linesFromFile.First().Split(',').Length;
-            
+
             var matrix = new Matrix(rows, columns);
 
             for (var i = 0; i < rows; i++)
             {
-                var lineValues = linesFromFile[i].Split(',');
+                string[] lineValues = linesFromFile[i].Split(',');
 
                 if (lineValues.Length != columns)
                 {

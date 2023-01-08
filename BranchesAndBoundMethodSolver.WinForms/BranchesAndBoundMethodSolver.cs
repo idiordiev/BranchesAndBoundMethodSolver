@@ -15,7 +15,7 @@ namespace BranchesAndBoundMethodSolver.WinForms
 
         private void SetFileButton_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new();
+            OpenFileDialog openFileDialog = new OpenFileDialog();
             DialogResult result = openFileDialog.ShowDialog();
 
             if (result == DialogResult.OK)
@@ -29,10 +29,14 @@ namespace BranchesAndBoundMethodSolver.WinForms
             string outputText = HtmlOutput.Text;
 
             if (!string.IsNullOrEmpty(outputText))
+            {
                 Clipboard.SetText(outputText);
+            }
             else
+            {
                 MessageBox.Show("Вивід пустий!", "Помилка",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private async void ProceedButton_ClickAsync(object sender, EventArgs e)
@@ -65,15 +69,15 @@ namespace BranchesAndBoundMethodSolver.WinForms
             Matrix inputMatrix = MatrixReader.ReadMatrix(inputFilePath);
 
             IAlgorithm bnbAlgorithm = new BranchAndBoundAlgorithm(inputMatrix);
-            
+
             IEnumerable<Node> result = bnbAlgorithm.Calculate();
 
             string htmlOutput = HtmlWrapper.Wrapp(result);
 
-            string path = "";
-            string pathValue = "";
-            
-            foreach (var node in result)
+            var path = "";
+            var pathValue = "";
+
+            foreach (Node? node in result)
             {
                 if (node.Status == NodeStatus.Record)
                 {

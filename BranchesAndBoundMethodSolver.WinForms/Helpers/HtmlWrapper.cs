@@ -8,39 +8,43 @@ namespace BranchesAndBoundMethodSolver.WinForms.Helpers
     {
         public static string Wrapp(IEnumerable<Node> nodes)
         {
-            StringBuilder stringBuilder = new();
+            var stringBuilder = new StringBuilder();
             stringBuilder.Append("<table>\n" +
-                " <thead>\n" +
-                "     <tr>\n" +
-                "         <th scope=\"col\"><span style=\"\">Підмножина</span></th>\n" +
-                "         <th scope=\"col\"><span style=\"\">Оцінка</span></th>\n" +
-                "         <th scope=\"col\"><span style=\"\">Статус</span></th>\n" +
-                "     </tr>\n" +
-                " </thead>\n" +
-                " <tbody>\n");
+                                 " <thead>\n" +
+                                 "     <tr>\n" +
+                                 "         <th scope=\"col\"><span style=\"\">Підмножина</span></th>\n" +
+                                 "         <th scope=\"col\"><span style=\"\">Оцінка</span></th>\n" +
+                                 "         <th scope=\"col\"><span style=\"\">Статус</span></th>\n" +
+                                 "     </tr>\n" +
+                                 " </thead>\n" +
+                                 " <tbody>\n");
 
-            foreach (var node in nodes)
+            foreach (Node? node in nodes)
             {
                 stringBuilder.Append("     <tr>\r\n" +
-                    "         <td>{1:SA:=" + $"{node.Path}" + "}</td>\n" +
-                    "         <td>{1:SA:=" + $"{node.Cost}" + "}</td>\n");
+                                     "         <td>{1:SA:=" + $"{node.Path}" + "}</td>\n" +
+                                     "         <td>{1:SA:=" + $"{node.Cost}" + "}</td>\n");
 
                 switch (node.Status)
                 {
                     case NodeStatus.Branched:
-                        stringBuilder.Append("         <td>{1:MC:=розгалужена~виключена&nbsp;за ВД~виключена&nbsp;за тестом~рекорд}</td>\n");
+                        stringBuilder.Append(
+                            "         <td>{1:MC:=розгалужена~виключена&nbsp;за ВД~виключена&nbsp;за тестом~рекорд}</td>\n");
                         break;
 
                     case NodeStatus.ExcludedByVD:
-                        stringBuilder.Append("         <td>{1:MC:розгалужена~=виключена&nbsp;за ВД~виключена&nbsp;за тестом~рекорд}</td>\n");
+                        stringBuilder.Append(
+                            "         <td>{1:MC:розгалужена~=виключена&nbsp;за ВД~виключена&nbsp;за тестом~рекорд}</td>\n");
                         break;
 
                     case NodeStatus.ExcludedByTest:
-                        stringBuilder.Append("         <td>{1:MC:розгалужена~виключена&nbsp;за ВД~=виключена&nbsp;за тестом~рекорд}</td>\n");
+                        stringBuilder.Append(
+                            "         <td>{1:MC:розгалужена~виключена&nbsp;за ВД~=виключена&nbsp;за тестом~рекорд}</td>\n");
                         break;
 
                     case NodeStatus.Record:
-                        stringBuilder.Append("         <td>{1:MC:розгалужена~виключена&nbsp;за ВД~виключена&nbsp;за тестом~=рекорд}</td>\n");
+                        stringBuilder.Append(
+                            "         <td>{1:MC:розгалужена~виключена&nbsp;за ВД~виключена&nbsp;за тестом~=рекорд}</td>\n");
                         break;
                 }
 
@@ -48,7 +52,7 @@ namespace BranchesAndBoundMethodSolver.WinForms.Helpers
             }
 
             string endOfHtml = " </tbody>\n" +
-                "</table>";
+                               "</table>";
 
             stringBuilder.Append(endOfHtml);
 

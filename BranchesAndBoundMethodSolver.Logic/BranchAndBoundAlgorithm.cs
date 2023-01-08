@@ -22,7 +22,7 @@ namespace BranchesAndBoundMethodSolver.Logic
                 return new List<Node>();
             }
 
-            var endNode = (NodeName)_matrix.Rows - 1;
+            NodeName endNode = (NodeName)_matrix.Rows - 1;
 
             var currentNode = new Node
             {
@@ -31,7 +31,7 @@ namespace BranchesAndBoundMethodSolver.Logic
                 Cost = 0,
                 Status = NodeStatus.ReadyToBranch
             };
-            
+
             _result.Add(currentNode);
 
             while (_result.Any(n => n.Status == NodeStatus.ReadyToBranch))
@@ -63,11 +63,13 @@ namespace BranchesAndBoundMethodSolver.Logic
         {
             while (true)
             {
-                var currentRecordCandidates = _result.Where(n => n.Name == endNode && n.Status == NodeStatus.ReadyToBranch);
-                var currentRecord = currentRecordCandidates.OrderBy(r => r.Cost).First();
+                var currentRecordCandidates =
+                    _result.Where(n => n.Name == endNode && n.Status == NodeStatus.ReadyToBranch);
+                Node currentRecord = currentRecordCandidates.OrderBy(r => r.Cost).First();
 
-                var nodesWithGreaterCost = _result.Where(n => n.Cost > currentRecord.Cost && n.Status == NodeStatus.ReadyToBranch);
-                foreach (var node in nodesWithGreaterCost)
+                var nodesWithGreaterCost =
+                    _result.Where(n => n.Cost > currentRecord.Cost && n.Status == NodeStatus.ReadyToBranch);
+                foreach (Node node in nodesWithGreaterCost)
                 {
                     node.Status = NodeStatus.ExcludedByTest;
                 }
@@ -79,7 +81,7 @@ namespace BranchesAndBoundMethodSolver.Logic
 
                 if (nodesReadyToBranch.Any())
                 {
-                    foreach (var node in nodesReadyToBranch)
+                    foreach (Node node in nodesReadyToBranch)
                     {
                         BranchNode(node);
                         break;
@@ -87,10 +89,11 @@ namespace BranchesAndBoundMethodSolver.Logic
                 }
                 else
                 {
-                    foreach (var node in currentRecordCandidates)
+                    foreach (Node node in currentRecordCandidates)
                     {
                         node.Status = NodeStatus.Record;
                     }
+
                     break;
                 }
             }
@@ -119,7 +122,7 @@ namespace BranchesAndBoundMethodSolver.Logic
             var nodesWithSameCostButShorterPath = _result.Where(n => n.Cost == currentNode.Cost
                                                                      && n.Path.Length < currentNode.Path.Length
                                                                      && n.Status == NodeStatus.ReadyToBranch);
-            foreach (var node in nodesWithSameCostButShorterPath)
+            foreach (Node node in nodesWithSameCostButShorterPath)
             {
                 node.Status = NodeStatus.ExcludedByVD;
             }
@@ -130,7 +133,7 @@ namespace BranchesAndBoundMethodSolver.Logic
             var sameNodesWithGreaterCost = _result.Where(n => n.Name == currentNode.Name
                                                               && n.Cost > currentNode.Cost
                                                               && n.Status == NodeStatus.ReadyToBranch);
-            foreach (var node in sameNodesWithGreaterCost)
+            foreach (Node node in sameNodesWithGreaterCost)
             {
                 node.Status = NodeStatus.ExcludedByVD;
             }

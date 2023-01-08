@@ -1,20 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWindowsForms>true</UseWindowsForms>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <ApplicationIcon>calculating.ico</ApplicationIcon>
-  </PropertyGroup>
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <UseWindowsForms>true</UseWindowsForms>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <ApplicationIcon>calculating.ico</ApplicationIcon>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Content Include="calculating.ico" />
-  </ItemGroup>
+    <ItemGroup>
+        <Content Include="calculating.ico"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\BranchesAndBoundMethodSolver.Logic\BranchesAndBoundMethodSolver.Logic.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\BranchesAndBoundMethodSolver.Logic\BranchesAndBoundMethodSolver.Logic.csproj"/>
+    </ItemGroup>
 
 </Project>
