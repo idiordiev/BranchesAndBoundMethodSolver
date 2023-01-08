@@ -28,7 +28,7 @@
             
             _result.Add(currentNode);
 
-            while (true)
+            while (_result.Any(n => n.Status == NodeStatus.ReadyToBranch))
             {
                 var currentRecordCandidates = _result.Where(n => n.Name == endNode).ToList();
                 if (currentRecordCandidates.Any())
@@ -81,11 +81,11 @@
 
         private void BranchNode(Node node)
         {
-            for (var column = 0; column <= _matrix.Rows - 1; column++)
+            node.Status = NodeStatus.Branched;
+            for (var column = 0; column <= _matrix.Columns - 1; column++)
             {
                 if (_matrix[(int)node.Name, column] > 0)
                 {
-                    node.Status = NodeStatus.Branched;
                     _result.Add(new Node
                     {
                         Path = node.Path + (NodeName)column,

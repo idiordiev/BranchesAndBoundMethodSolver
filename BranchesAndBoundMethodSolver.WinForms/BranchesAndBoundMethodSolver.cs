@@ -63,7 +63,7 @@ namespace BranchesAndBoundMethodSolver.WinForms
             IAlgorithm bnbAlgorithm = new BranchAndBoundAlgorithm(inputMatrix);
             
             // Needs update~ Defining last element of sequence to put there \/
-            IEnumerable<Node> result = bnbAlgorithm.Calculate(NodeName.K);
+            IEnumerable<Node> result = bnbAlgorithm.Calculate(NodeName.J);
 
             string htmlOutput = HtmlWrapper.Wrapp(result);
 
