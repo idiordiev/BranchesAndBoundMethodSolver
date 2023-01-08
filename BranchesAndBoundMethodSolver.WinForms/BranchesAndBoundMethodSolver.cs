@@ -27,7 +27,7 @@ namespace BranchesAndBoundMethodSolver.WinForms
             if (!string.IsNullOrEmpty(outputText))
                 Clipboard.SetText(outputText);
             else
-                MessageBox.Show("Вивід пустий!", "Помилка",
+                MessageBox.Show("Р’РёРІС–Рґ РїСѓСЃС‚РёР№!", "РџРѕРјРёР»РєР°",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
@@ -41,7 +41,7 @@ namespace BranchesAndBoundMethodSolver.WinForms
 
                 if (!task.IsCompleted)
                 {
-                    HtmlOutput.Text = "Будь ласка зачекайте";
+                    HtmlOutput.Text = "Р‘СѓРґСЊ Р»Р°СЃРєР°, Р·Р°С‡РµРєР°Р№С‚Рµ";
                 }
 
                 await task;
@@ -51,7 +51,7 @@ namespace BranchesAndBoundMethodSolver.WinForms
             }
             else
             {
-                MessageBox.Show("Шлях не задано!", "Помилка",
+                MessageBox.Show("РЁР»СЏС… РЅРµ Р·Р°РґР°РЅРѕ!", "РџРѕРјРёР»РєР°",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
