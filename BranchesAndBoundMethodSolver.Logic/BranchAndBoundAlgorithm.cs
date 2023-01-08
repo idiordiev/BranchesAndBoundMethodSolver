@@ -11,12 +11,14 @@
             _result = new List<Node>();
         }
 
-        public IEnumerable<Node> Calculate(NodeName endNode)
+        public IEnumerable<Node> Calculate()
         {
             if (_matrix.Rows == 0 || _matrix.Columns == 0)
             {
                 return new List<Node>();
             }
+
+            var endNode = (NodeName)_matrix.Rows - 1;
 
             var currentNode = new Node
             {

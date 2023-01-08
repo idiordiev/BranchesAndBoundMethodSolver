@@ -2,6 +2,6 @@
 {
     public interface IAlgorithm
     {
-        IEnumerable<Node> Calculate(NodeName endNode);
+        IEnumerable<Node> Calculate();
     }
 }
