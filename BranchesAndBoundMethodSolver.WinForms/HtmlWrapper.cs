@@ -25,7 +25,7 @@ namespace BranchesAndBoundMethodSolver.WinForms
                     "         <td>{1:SA:=" + $"{node.Path}" + "}</td>\n" +
                     "         <td>{1:SA:=" + $"{node.Cost}" + "}</td>\n" +
                     "         <td>{1:MC:=розгалужена~виключена&nbsp;за ВД~виключена&nbsp;за тестом~рекорд~-}</td>\n" +
-                    "     </tr>");
+                    "     </tr>\n");
             }
 
             string endOfHtml = " </tbody>\n" +
