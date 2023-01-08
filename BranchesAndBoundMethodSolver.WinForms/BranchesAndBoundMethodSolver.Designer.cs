@@ -105,6 +105,7 @@
             // 
             // CopyButton
             // 
+            this.CopyButton.Enabled = false;
             this.CopyButton.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.CopyButton.Location = new System.Drawing.Point(442, 189);
             this.CopyButton.Name = "CopyButton";

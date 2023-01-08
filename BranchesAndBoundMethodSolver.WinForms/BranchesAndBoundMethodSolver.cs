@@ -40,11 +40,14 @@ namespace BranchesAndBoundMethodSolver.WinForms
                 Task<string> task = Task.Run(() => ProceedOperation(inputFilePath));
 
                 if (!task.IsCompleted)
+                {
                     HtmlOutput.Text = "Будь ласка зачекайте";
+                }
 
                 await task;
 
                 HtmlOutput.Text = task.Result;
+                CopyButton.Enabled = true;
             }
             else
             {
