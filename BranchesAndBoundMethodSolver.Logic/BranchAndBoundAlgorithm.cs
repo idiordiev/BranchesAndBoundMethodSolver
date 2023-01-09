@@ -51,7 +51,7 @@ namespace BranchesAndBoundMethodSolver.Logic
                     .First();
 
                 ExcludeSameNodesWithGreaterPathCost(currentNode);
-                ExcludeNodesWithSameCostButShorterPath(currentNode);
+                //ExcludeNodesWithSameCostButShorterPath(currentNode);
 
                 BranchNode(currentNode);
             }
