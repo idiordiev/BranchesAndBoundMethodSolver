@@ -1,3 +1,4 @@
+using System.IO.IsolatedStorage;
 using BranchesAndBoundMethodSolver.Logic;
 using BranchesAndBoundMethodSolver.Logic.Enums;
 using BranchesAndBoundMethodSolver.Logic.Interfaces;
@@ -66,32 +67,41 @@ namespace BranchesAndBoundMethodSolver.WinForms
 
         private string ProceedOperation(string inputFilePath)
         {
-            Matrix inputMatrix = MatrixReader.ReadMatrix(inputFilePath);
-
-            IAlgorithm bnbAlgorithm = new BranchAndBoundAlgorithm(inputMatrix);
-
-            IEnumerable<Node> result = bnbAlgorithm.Calculate();
-
-            SaveNodesToFile(result);
-
-            string htmlOutput = HtmlWrapper.Wrapp(result);
-
-            var path = "";
-            var pathValue = "";
-
-            foreach (Node? node in result)
+            try
             {
-                if (node.Status == NodeStatus.Record)
+                Matrix inputMatrix = MatrixReader.ReadMatrix(inputFilePath);
+
+                IAlgorithm bnbAlgorithm = new BranchAndBoundAlgorithm(inputMatrix);
+
+                IEnumerable<Node> result = bnbAlgorithm.Calculate();
+
+                SaveNodesToFile(result);
+
+                string htmlOutput = HtmlWrapper.Wrapp(result);
+
+                var path = "";
+                var pathValue = "";
+
+                foreach (Node? node in result)
                 {
-                    path += $"{node.Path} ";
-                    pathValue = $"{node.Cost} ";
+                    if (node.Status == NodeStatus.Record)
+                    {
+                        path += $"{node.Path} ";
+                        pathValue = $"{node.Cost} ";
+                    }
                 }
+
+                ResultPath.Invoke((MethodInvoker)(() => ResultPath.Text = path));
+                ResultPathValue.Invoke((MethodInvoker)(() => ResultPathValue.Text = pathValue));
+
+                return htmlOutput;
             }
-
-            ResultPath.Invoke((MethodInvoker)(() => ResultPath.Text = path));
-            ResultPathValue.Invoke((MethodInvoker)(() => ResultPathValue.Text = pathValue));
-
-            return htmlOutput;
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка: {ex.Message}", "Помилка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return "";
+            }
         }
 
         private void CleanButton_Click(object sender, EventArgs e)
@@ -107,7 +117,7 @@ namespace BranchesAndBoundMethodSolver.WinForms
         {
             string applicationPath = Path.GetFullPath(System.AppDomain.CurrentDomain.BaseDirectory);
             string saveFilePath = Path.Combine(applicationPath, "node_logs.txt");
-            StreamWriter w = new(saveFilePath, true);
+            StreamWriter w = new(new IsolatedStorageFileStream(saveFilePath, FileMode.Truncate));
 
             foreach (var node in nodes)
                 w.WriteLine($"Name: {node.Name}  Path: {node.Path}  Cost: {node.Cost}  Status: {node.Status}");
