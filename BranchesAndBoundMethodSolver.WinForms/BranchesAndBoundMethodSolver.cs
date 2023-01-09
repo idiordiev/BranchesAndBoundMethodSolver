@@ -116,8 +116,8 @@ namespace BranchesAndBoundMethodSolver.WinForms
         private void SaveNodesToFile(IEnumerable<Node> nodes)
         {
             string applicationPath = Path.GetFullPath(System.AppDomain.CurrentDomain.BaseDirectory);
-            string saveFilePath = Path.Combine(applicationPath, "node_logs.txt");
-            StreamWriter w = new(new IsolatedStorageFileStream(saveFilePath, FileMode.Truncate));
+            string saveFilePath = Path.Combine(applicationPath, $"logs_{DateTime.UtcNow.ToString("yyyyMMddHHmmss")}.txt");
+            StreamWriter w = new StreamWriter(saveFilePath, true);
 
             foreach (var node in nodes)
                 w.WriteLine($"Name: {node.Name}  Path: {node.Path}  Cost: {node.Cost}  Status: {node.Status}");
