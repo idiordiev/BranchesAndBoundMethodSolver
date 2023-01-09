@@ -10,11 +10,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Content Include="calculating.ico"/>
+        <Content Include="calculating.ico" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\BranchesAndBoundMethodSolver.Logic\BranchesAndBoundMethodSolver.Logic.csproj"/>
+        <ProjectReference Include="..\BranchesAndBoundMethodSolver.Logic\BranchesAndBoundMethodSolver.Logic.csproj" />
     </ItemGroup>
 
 </Project>

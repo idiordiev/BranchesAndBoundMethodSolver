@@ -72,6 +72,8 @@ namespace BranchesAndBoundMethodSolver.WinForms
 
             IEnumerable<Node> result = bnbAlgorithm.Calculate();
 
+            SaveNodesToFile(result);
+
             string htmlOutput = HtmlWrapper.Wrapp(result);
 
             var path = "";
@@ -99,6 +101,18 @@ namespace BranchesAndBoundMethodSolver.WinForms
             HtmlOutput.Text = "";
             PathString.Text = "";
             CopyButton.Enabled = false;
+        }
+
+        private void SaveNodesToFile(IEnumerable<Node> nodes)
+        {
+            string applicationPath = Path.GetFullPath(System.AppDomain.CurrentDomain.BaseDirectory);
+            string saveFilePath = Path.Combine(applicationPath, "node_logs.txt");
+            StreamWriter w = new(saveFilePath, true);
+
+            foreach (var node in nodes)
+                w.WriteLine($"Name: {node.Name}  Path: {node.Path}  Cost: {node.Cost}  Status: {node.Status}");
+
+            w.Close();
         }
     }
 }
