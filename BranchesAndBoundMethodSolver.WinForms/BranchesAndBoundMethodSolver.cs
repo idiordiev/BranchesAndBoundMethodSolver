@@ -73,7 +73,9 @@ namespace BranchesAndBoundMethodSolver.WinForms
 
                 IAlgorithm bnbAlgorithm = new BranchAndBoundAlgorithm(inputMatrix);
 
-                IEnumerable<Node> result = bnbAlgorithm.Calculate();
+                IEnumerable<Node> result = bnbAlgorithm.Calculate()
+                    .OrderBy(n => n.Path.Length)
+                    .ThenBy(n => n.Path);
 
                 SaveNodesToFile(result);
 
