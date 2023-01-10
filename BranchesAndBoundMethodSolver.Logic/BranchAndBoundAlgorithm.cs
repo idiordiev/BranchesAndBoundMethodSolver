@@ -50,6 +50,7 @@ namespace BranchesAndBoundMethodSolver.Logic
                     .ThenBy(n => n.Name)
                     .First();
 
+
                 ExcludeSameNodesWithGreaterPathCost(currentNode);
                 //ExcludeNodesWithSameCostButShorterPath(currentNode);
 
@@ -65,10 +66,15 @@ namespace BranchesAndBoundMethodSolver.Logic
             {
                 var currentRecordCandidates =
                     _result.Where(n => n.Name == endNode && n.Status == NodeStatus.ReadyToBranch);
-                Node currentRecord = currentRecordCandidates.OrderBy(r => r.Cost).First();
+
+                int currentRecordCost = currentRecordCandidates.OrderBy(r => r.Cost).First().Cost;
+                var currentRecords = currentRecordCandidates.Where(n => n.Cost == currentRecordCost);
 
                 var nodesWithGreaterCost =
-                    _result.Where(n => n.Cost > currentRecord.Cost && n.Status == NodeStatus.ReadyToBranch);
+                    _result.Where(n => n.Cost >= currentRecordCost 
+                        && n.Status == NodeStatus.ReadyToBranch
+                        && !currentRecords.Contains(n));
+
                 foreach (Node node in nodesWithGreaterCost)
                 {
                     node.Status = NodeStatus.ExcludedByTest;
