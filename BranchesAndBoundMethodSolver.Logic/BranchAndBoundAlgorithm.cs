@@ -51,10 +51,10 @@ namespace BranchesAndBoundMethodSolver.Logic
                     .First();
 
 
-                ExcludeSameNodesWithGreaterPathCost(currentNode);
+                BranchNode(currentNode);
                 //ExcludeNodesWithSameCostButShorterPath(currentNode);
 
-                BranchNode(currentNode);
+                ExcludeSameNodesWithGreaterPathCost(currentNode);
             }
 
             return _result;
@@ -89,6 +89,11 @@ namespace BranchesAndBoundMethodSolver.Logic
                 {
                     foreach (Node node in nodesReadyToBranch)
                     {
+                        Node smallestNode = _result.Where(n => n.Name == node.Name && !currentRecords.Contains(n))
+                            .OrderBy(n => n.Cost)
+                            .First();
+                        ExcludeSameNodesWithGreaterPathCost(smallestNode);
+
                         BranchNode(node);
                         break;
                     }
@@ -107,6 +112,9 @@ namespace BranchesAndBoundMethodSolver.Logic
 
         private void BranchNode(Node node)
         {
+            if (!(node.Status == NodeStatus.ReadyToBranch))
+                return;
+
             node.Status = NodeStatus.Branched;
             for (var column = 0; column <= _matrix.Columns - 1; column++)
             {
