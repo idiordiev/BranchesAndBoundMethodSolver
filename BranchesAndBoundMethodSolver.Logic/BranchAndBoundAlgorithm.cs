@@ -43,6 +43,7 @@ namespace BranchesAndBoundMethodSolver.Logic
             {
                 iteration++;
                 Log.Information("Iteration {Iteration}", iteration);
+                Log.Information("Nodes: [{Nodes}]", string.Join(", ", _result.Select(n => $"{n.Path}:{n.Cost}:{n.Status}")));
                 
                 var currentRecordCandidates = _result.Where(n => n.Name == endNode);
                 if (currentRecordCandidates.Any())
@@ -78,6 +79,7 @@ namespace BranchesAndBoundMethodSolver.Logic
             {
                 iteration++;
                 Log.Information("Record iteration {Iteration}", iteration);
+                Log.Information("Nodes: [{Nodes}]", string.Join(", ", _result.Select(n => $"{n.Path}:{n.Cost}:{n.Status}")));
                 
                 var currentRecordCandidates =
                     _result.Where(n => n.Name == endNode && n.Status == NodeStatus.ReadyToBranch);
@@ -161,25 +163,14 @@ namespace BranchesAndBoundMethodSolver.Logic
             }
         }
 
-        private void ExcludeNodesWithSameCostButShorterPath(Node currentNode)
-        {
-            var nodesWithSameCostButShorterPath = _result.Where(n => n.Cost == currentNode.Cost
-                                                                     && n.Path.Length < currentNode.Path.Length
-                                                                     && n.Status == NodeStatus.ReadyToBranch);
-            foreach (Node node in nodesWithSameCostButShorterPath)
-            {
-                node.Status = NodeStatus.ExcludedByVD;
-            }
-        }
-
         private void ExcludeSameNodesWithGreaterPathCost(Node currentNode)
         {
-            Log.Information("Excluding nodes with same name ({Name}) but greater cost", currentNode.Name);
             var sameNodesWithGreaterCost = _result.Where(n => n.Name == currentNode.Name
                                                               && n.Cost > currentNode.Cost
                                                               && n.Status == NodeStatus.ReadyToBranch);
             foreach (Node node in sameNodesWithGreaterCost)
             {
+                Log.Information("Excluding node {Path} with cost {Cost} by VD", node.Path, node.Cost);
                 node.Status = NodeStatus.ExcludedByVD;
             }
         }
