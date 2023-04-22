@@ -1,7 +1,9 @@
-﻿using BranchesAndBoundMethodSolver.Logic.Enums;
+﻿using System.Diagnostics;
+using BranchesAndBoundMethodSolver.Logic.Enums;
 
 namespace BranchesAndBoundMethodSolver.Logic.Models
 {
+    [DebuggerDisplay("{Path} {Cost} {Status}")]
     public class Node
     {
         public string Path { get; set; }

@@ -115,14 +115,14 @@ namespace BranchesAndBoundMethodSolver.WinForms
 
         private void SaveNodesToFile(IEnumerable<Node> nodes)
         {
-            string folderPath = Path.GetFullPath(System.AppDomain.CurrentDomain.BaseDirectory) + "/logs";
+            string folderPath = Path.GetFullPath(System.AppDomain.CurrentDomain.BaseDirectory) + "/resultlogs";
 
             if (!Directory.Exists(folderPath))
             {
                 Directory.CreateDirectory(folderPath);
             }
 
-            string saveFilePath = Path.Combine(folderPath, $"logs_{DateTime.UtcNow.ToString("yyyyMMddHHmmss")}.txt");
+            string saveFilePath = Path.Combine(folderPath, $"resultlogs_{DateTime.UtcNow.ToString("yyyyMMddHHmmss")}.txt");
             StreamWriter w = new StreamWriter(saveFilePath, true);
 
             foreach (var node in nodes)

@@ -1,3 +1,5 @@
+using Serilog;
+
 namespace BranchesAndBoundMethodSolver.WinForms
 {
     internal static class Program
@@ -8,6 +10,11 @@ namespace BranchesAndBoundMethodSolver.WinForms
         [STAThread]
         private static void Main()
         {
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.File("logs\\log-.txt", rollingInterval: RollingInterval.Day)
+                .CreateLogger();
+            
             ApplicationConfiguration.Initialize();
             Application.Run(new BranchesAndBoundMethodSolver());
         }
