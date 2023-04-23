@@ -7,8 +7,8 @@ namespace BranchesAndBoundMethodSolver.Logic
 {
     public class BranchAndBoundAlgorithm : IAlgorithm
     {
-        private Matrix _matrix;
-        private ICollection<Node> _result;
+        private readonly Matrix _matrix;
+        private readonly ICollection<Node> _result;
 
         public BranchAndBoundAlgorithm(Matrix matrix)
         {
@@ -61,7 +61,6 @@ namespace BranchesAndBoundMethodSolver.Logic
                 Log.Information("Current node {Path}, cost {Cost}", currentNode.Path, currentNode.Cost);
                 
                 BranchNode(currentNode);
-                //ExcludeNodesWithSameCostButShorterPath(currentNode);
                 
                 ExcludeSameNodesWithGreaterPathCost(currentNode);
             }
