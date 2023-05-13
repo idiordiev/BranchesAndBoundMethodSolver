@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BranchesAndBoundMethodSolve
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BranchesAndBoundMethodSolver.WinForms", "BranchesAndBoundMethodSolver.WinForms\BranchesAndBoundMethodSolver.WinForms.csproj", "{2F68ED73-F4E0-46DC-B8C1-4366128DE407}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BranchAndBoundMethodSolver.Tests", "BranchAndBoundMethodSolver.Tests\BranchAndBoundMethodSolver.Tests.csproj", "{05C3A473-A12F-4098-9EA5-BADB0D1C0B7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BranchAndBoundMethodSolver.Benchmarks", "BranchAndBoundMethodSolver.Benchmarks\BranchAndBoundMethodSolver.Benchmarks.csproj", "{FFAA8804-3447-4ED9-B66C-43E2F29D9517}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{2F68ED73-F4E0-46DC-B8C1-4366128DE407}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F68ED73-F4E0-46DC-B8C1-4366128DE407}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F68ED73-F4E0-46DC-B8C1-4366128DE407}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05C3A473-A12F-4098-9EA5-BADB0D1C0B7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05C3A473-A12F-4098-9EA5-BADB0D1C0B7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05C3A473-A12F-4098-9EA5-BADB0D1C0B7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05C3A473-A12F-4098-9EA5-BADB0D1C0B7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFAA8804-3447-4ED9-B66C-43E2F29D9517}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFAA8804-3447-4ED9-B66C-43E2F29D9517}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFAA8804-3447-4ED9-B66C-43E2F29D9517}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFAA8804-3447-4ED9-B66C-43E2F29D9517}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
