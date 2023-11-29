@@ -19,7 +19,9 @@ public class BranchAndBoundAlgorithm : IAlgorithm
     public IEnumerable<Node> Calculate()
     {
         if (_matrix.Rows == 0 || _matrix.Columns == 0)
+        {
             return new List<Node>();
+        }
 
         Log.Information("Start calculation. Number of nodes {Count}", _matrix.Rows);
         var endNode = (NodeName)_matrix.Rows - 1;
@@ -41,16 +43,16 @@ public class BranchAndBoundAlgorithm : IAlgorithm
         {
             iteration++;
             Log.Information("Iteration {Iteration}", iteration);
-            Log.Information("Nodes: [{Nodes}]",
-                string.Join(", ", _result.Select(n => $"{n.Path}:{n.Cost}:{n.Status}")));
+            Log.Information("Nodes: [{Nodes}]", string.Join(", ", _result.Select(n => $"{n.Path}:{n.Cost}:{n.Status}")));
 
-            var currentRecordCandidates = _result.Where(n => n.Name == endNode);
-            if (currentRecordCandidates.Any())
+            // Check if any records
+            if (_result.Any(n => n.Name == endNode))
             {
                 FindRecords(endNode);
                 break;
             }
 
+            // Branch node
             currentNode = _result
                 .Where(n => n.Status == NodeStatus.ReadyToBranch)
                 .OrderBy(n => n.Cost)
@@ -60,11 +62,19 @@ public class BranchAndBoundAlgorithm : IAlgorithm
 
             BranchNode(currentNode);
 
-            foreach (var node in _result.Where(x => x.Status == NodeStatus.ReadyToBranch))
+            // Exclude by VD
+            var nodesToCheckByVd = _result
+                .Where(x => x.Status is NodeStatus.ReadyToBranch or NodeStatus.Branched)
+                .OrderBy(x => x.Cost).ToList();
+
+            foreach (var node in nodesToCheckByVd)
+            {
                 ExcludeByVD(node);
+            }
         }
 
         Log.Information("Calculation ended");
+        
         return _result;
     }
 
@@ -80,32 +90,21 @@ public class BranchAndBoundAlgorithm : IAlgorithm
             Log.Information("Nodes: [{Nodes}]",
                 string.Join(", ", _result.Select(n => $"{n.Path}:{n.Cost}:{n.Status}")));
 
-            var currentRecordCandidates =
-                _result.Where(n => n.Name == endNode && n.Status == NodeStatus.ReadyToBranch);
-            Log.Information("Current record candidates {Candidates}",
-                string.Join(", ", currentRecordCandidates.Select(x => x.Path)));
+            var currentRecordCandidates = _result.Where(n => n.Name == endNode && n.Status == NodeStatus.ReadyToBranch);
+            Log.Information("Current record candidates {Candidates}", string.Join(", ", currentRecordCandidates.Select(x => x.Path)));
 
             var currentRecordCost = currentRecordCandidates.OrderBy(r => r.Cost).First().Cost;
             Log.Information("Current record cost {Cost}", currentRecordCost);
 
             var currentRecords = currentRecordCandidates.Where(n => n.Cost == currentRecordCost);
             Log.Information("Current records {Records}", string.Join(", ", currentRecords.Select(x => x.Path)));
-
-            var nodesWithGreaterCost =
-                _result.Where(n => n.Cost >= currentRecordCost
-                                   && n.Status == NodeStatus.ReadyToBranch
-                                   && !currentRecords.Contains(n));
-            Log.Information("Nodes with greater cost {Nodes}",
-                string.Join(", ", nodesWithGreaterCost.Select(x => x.Path)));
-
-            foreach (var node in nodesWithGreaterCost)
-            {
-                Log.Information("Excluding node {Path} with cost {Cost} by test", node.Path, node.Cost);
-                node.Status = NodeStatus.ExcludedByTest;
-            }
-
+            
+            ExcludeByTest(currentRecordCost, currentRecords);
+            
+            // Branch node
             Log.Information("Start branching nodes");
-            var nodeToBranch = _result.Where(n => n.Status == NodeStatus.ReadyToBranch && n.Name != endNode)
+            var nodeToBranch = _result
+                .Where(n => n.Status == NodeStatus.ReadyToBranch && n.Name != endNode)
                 .OrderBy(n => n.Cost)
                 .ThenByDescending(n => n.Path.Length)
                 .FirstOrDefault();
@@ -123,18 +122,45 @@ public class BranchAndBoundAlgorithm : IAlgorithm
             }
 
             BranchNode(nodeToBranch);
+            
+            ExcludeByTest(currentRecordCost, currentRecords);
 
-            foreach (var node in _result.Where(n => n.Status == NodeStatus.ReadyToBranch && n.Name != endNode))
+            // Exclude by VD
+            var nodesToCheckByVd = _result
+                .Where(x => x.Status is NodeStatus.ReadyToBranch or NodeStatus.Branched
+                            && x.Name != endNode)
+                .OrderBy(x => x.Cost)
+                .ToList();
+
+            foreach (var node in nodesToCheckByVd)
             {
                 ExcludeByVD(node);
             }
         }
     }
 
+    private void ExcludeByTest(int currentRecordCost, IEnumerable<Node> currentRecords)
+    {
+        // Exclude by Test
+        var nodesWithGreaterCost = _result.Where(n => n.Cost >= currentRecordCost
+                                                      && n.Status == NodeStatus.ReadyToBranch
+                                                      && !currentRecords.Contains(n));
+        Log.Information("Nodes with greater cost {Nodes}",
+            string.Join(", ", nodesWithGreaterCost.Select(x => x.Path)));
+
+        foreach (var node in nodesWithGreaterCost)
+        {
+            Log.Information("Excluding node {Path} with cost {Cost} by test", node.Path, node.Cost);
+            node.Status = NodeStatus.ExcludedByTest;
+        }
+    }
+
     private void BranchNode(Node node)
     {
         if (node.Status != NodeStatus.ReadyToBranch)
+        {
             return;
+        }
 
         Log.Information("Branching node {Path}", node.Path);
         node.Status = NodeStatus.Branched;
@@ -160,7 +186,7 @@ public class BranchAndBoundAlgorithm : IAlgorithm
     {
         var nodesToExclude = _result.Where(n => n.Name == currentNode.Name
                                                           && n.Cost > currentNode.Cost
-                                                          && n.Status == NodeStatus.ReadyToBranch);
+                                                          && n.Status is NodeStatus.ReadyToBranch or NodeStatus.Branched);
         foreach (var node in nodesToExclude)
         {
             Log.Information("Excluding node {Path} with cost {Cost} by VD", node.Path, node.Cost);
